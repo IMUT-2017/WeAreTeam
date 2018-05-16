@@ -9,7 +9,7 @@ import database.SQLManager;
 import entity.UserAndClass;
 
 public class UserAndClassDao {
-	public int GetUserCourseId(int userid ,int courseid){
+	public int GetUserCourseId(int userid){
 		UserAndClass userandclass = new UserAndClass();
 		// 姝ラ1锛氳幏鍙栦竴涓湁鏁堢殑鏁版嵁搴撻摼鎺�
 		ConnectionManager connectionManager = new ConnectionManager();
@@ -27,8 +27,8 @@ public class UserAndClassDao {
 			while (rs.next()) {
 				// 杩欎釜娌℃湁0锛屾槸浠�1寮�濮嬭褰曟暟鎹殑
 				userandclass.setId(rs.getInt(1));
-				userandclass.setId(rs.getInt(2));
-				userandclass.setId(rs.getInt(3));
+				userandclass.setUserID(rs.getInt(2));
+				userandclass.setClassID(rs.getInt(3));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -40,7 +40,7 @@ public class UserAndClassDao {
 			connectionManager.closeConnection(connection);
 		}
 
-		return courseid;
+		return userandclass.getClassID();
 	}
 
 }
