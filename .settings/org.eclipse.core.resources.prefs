@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 encoding//WebContent/admin.jsp=UTF-8
+encoding//src/dao/ClassDao.java=UTF-8
 encoding//src/dao/UserAndClassDao.java=UTF-8
