@@ -16,7 +16,7 @@ public class UserAndClassDao {
 		Connection connection = connectionManager.openConnection();
 
 		// 姝ラ2锛氳缃甋QL璇彞鍜屾暟鎹弬鏁�
-		String strSQL = "select * from userandclass where (userid=?)";
+		String strSQL = "select * from userandclass where (id=?)";
 		Object[] params = new Object[] {userid};
 
 		// 姝ラ3锛氬彂閫丼QL璇彞
