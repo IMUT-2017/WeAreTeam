@@ -2,48 +2,52 @@ package dao;
 
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import database.ConnectionManager;
 import database.SQLManager;
 import entity.CourseType;
+import entity.User;
 
 public class ClassDao {
-	public CourseType GetCourseType(int CourseId) {
-		CourseType coursetype = new CourseType();
-		// 姝ラ1锛氳幏鍙栦竴涓湁鏁堢殑鏁版嵁搴撻摼鎺�
-		ConnectionManager connectionManager = new ConnectionManager();
-		Connection connection = connectionManager.openConnection();
-
-		// 姝ラ2锛氳缃甋QL璇彞鍜屾暟鎹弬鏁�
-		String strSQL = "select * from class where ( id=? )";
-		Object[] params = new Object[] {CourseId};
-
-		// 姝ラ3锛氬彂閫丼QL璇彞
-		SQLManager sqlManager = new SQLManager();
-		ResultSet rs = sqlManager.executeRead(connection, strSQL, params);
-
+	
+	private ConnectionManager dc = new ConnectionManager();
+	private PreparedStatement ps = null;
+	
+	private Connection conn=dc.openConnection();//鑾峰緱鏁版嵁搴撶殑杩炴帴
+	private ResultSet rs = null;
+	
+	public List<CourseType> GetCourseType(int type,int pageIndex,int pageNum) {
+		List<CourseType> list = new ArrayList<CourseType>();
+		String sql = "select * from class where ( id=? )";
 		try {
-			while (rs.next()) {
-				// 杩欎釜娌℃湁0锛屾槸浠�1寮�濮嬭褰曟暟鎹殑
-				coursetype.setId(rs.getInt(1));
-				coursetype.setClassName(rs.getString(2));
-				coursetype.setCoverPaper(rs.getString(3));
-				coursetype.setIntroduce(rs.getString(4));
-				coursetype.setDate(rs.getString(6));
+			this.ps=this.conn.prepareStatement(sql);
+			ps.setInt(1, type);
+			ps.setInt(2, (pageIndex-1)*pageNum);
+			ps.setInt(3, pageNum);
+			rs=this.ps.executeQuery();
+			while(rs.next()){
+				CourseType c = new CourseType();
+				c.setId(rs.getInt(1));
+				c.setClassName(rs.getString(2));
+				c.setCoverPaper(rs.getString(3));
+				c.setIntroduce(rs.getString(4));
+				c.setDate(rs.getString(6));
+				list.add(c);
 			}
+			ps.close();
+			rs.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO 鑷姩鐢熸垚鐨� catch 鍧�
 			e.printStackTrace();
-			return coursetype;
-		} finally {
-
-			// 姝ラ4锛氬叧闂竴涓湁鏁堢殑鏁版嵁搴撻摼鎺�
-			connectionManager.closeConnection(connection);
 		}
-
-		return coursetype;
+		
+		return list;
 	}
+	
 
 }

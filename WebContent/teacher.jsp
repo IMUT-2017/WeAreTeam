@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,47 +16,56 @@
 </head>
 
 <body>
-<div class="main">
-	<aside class="sidebar">
-		<div class="sidebar-menu">
-			<div class="item vertical">
-				<a href="#">
-					<i class="icon icon-server"></i>
-					<span>课程1</span>
-					<span class="arrow"></span>
-				</a>
-				<div class="vertical-menu">
-					<a href="#">第一节</a>
-					<a href="#">第二节</a>
-					<a href="#">第三节</a>
-					<a href="sqltable.html">添加新节</a>
-				</div>
-			</div>
-			<div class="item vertical">
-				<a href="#">
-					<i class="icon icon-server"></i>
-					<span>课程2</span>
-					<span class="arrow"></span>
-				</a>
-				<div class="vertical-menu">
-					<a href="#">第一节</a>
-					<a href="#">第二节</a>
-					<a href="#">第三节</a>
-					<a href="sqltable.html">添加新节</a>
-				</div>
-			</div>
-		</div>
-	</aside>
-	<div class="main-content">
+<!-- logo -->
+<div style="text-align:center;background-color: white;">
+<img src="img/logo.png"/>
+</div>
+<!-- logo end -->
+<!-- head -->
+<div style="margin:0 auto;">
+<nav class="navbar navbar-default" role="navigation"> 
+    <div class="container-fluid"> 
+        <div class="navbar-header" style="padding-left:15%"> 
+            <a class="navbar-brand" href="index.jsp"><font color="black">首页</font></a> 
+        </div> 
+        <div class="navbar-header"> 
+            <a class="navbar-brand" href="mycourse.jsp"><font color="black">我的课程</font></a> 
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="teacher.jsp" style="background-color:blue;"><font color="white">教师管理界面</font></a> 
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="admin.jsp"><font color="black">管理员管理界面</font></a> 
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="personal.jsp"><font color="black">个人中心</font></a> 
+        </div>
+        <ul class="nav navbar-nav navbar-right" style="padding-right:15%">
+            <a class="navbar-brand" href="login.jsp"><font color="black">登陆</font></a> 
+        </ul> 
+    </div> 
+</nav>
+</div>
+<!-- head end -->
+<!-- slide nav -->
+<div style="position:absolute;">
+<nav class="menu" data-ride="menu" style="width: 180px;padding-top:10%">
+  <ul id="treeMenu" class="tree tree-menu" data-ride="tree">
+  <c:forEach items="${list }" var="coursetype">
+    <li>
+      <a href="#"><i class="icon icon-circle-blank"></i>${coursetype.name}</a>
+    </li>
+  </c:forEach> 
+  </ul>
+</nav>
+</div>
+<!-- slide nav end -->
+	<div class="main-content" style="padding-top:0px;">
 		<div class="wrapper">
-		<ol class="breadcrumb">
-  				<li><a href="#"><i class="icon icon-home"></i>课程1</a></li>
-  				<li><a href="#">第一节</a></li>
-			</ol>
 			<div class="panel">
 				<div class="panel-heading"><h5>课件</h5></div>
 				<div class="panel-body">
-					<div class="pull-right"><a href="sqltable.html"><button class="btn btn-primary">添加栏目</button></a></div>
+					<div class="pull-right"><a href="teaaddres.jsp"><button class="btn btn-primary">添加资源</button></a></div>
 					<form action="#" method="post">
 						<div class="search">
    							搜索名称：
@@ -66,155 +76,23 @@
 					<table class="table table-bordered table-hover table-striped">
 				        <thead>
 				          	<tr>
-				          		<th width="40" class="text-center"><input type="checkbox" name="checkbox"></th>
 					            <th width="50" class="text-center">ID</th>
-					            <th>栏目名称</th>
-					            <th width="200" class="text-center">上级栏目</th>
-					            <th width="150" class="text-center">更新日期</th>
+					            <th width="50" class="text-center">节数</th>
+					            <th width="200" class="text-center">视频</th>
+					            <th width="150" class="text-center">文档</th>
+					            <th width="140" class="text-center">作业</th>
 					            <th width="140" class="text-center">操作</th>
 				          	</tr>
 				        </thead>
 				        <tbody>
 				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
 					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
+					            <td class="text-center">第一节</td>
+					            <td>example.mp4（点击可下载）</td>
+					            <td class="text-center">example.doc（点击可下载）</td>
+					            <td class="text-center">example.doc（点击可下载）</td>
 					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
-									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
-					            </td>
-				          	</tr>
-				          	<tr>
-					          	<td class="text-center"><input type="checkbox" name="checkbox"></td>
-					            <td class="text-center">1</td>
-					            <td>这是栏目名称</td>
-					            <td class="text-center">--</td>
-					            <td class="text-center">2016-06-05 16:20</td>
-					            <td class="text-center">
-									<button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i> 编辑</button>
+									<a href="teaudres.jsp"><button type="button" class="btn btn-sm btn-success"><i class="icon-edit"></i>编辑</button></a>
 									<button type="button" class="btn btn-sm btn-danger"><i class="icon-trash"></i> 删除</button>
 					            </td>
 				          	</tr>
@@ -241,7 +119,12 @@
 			</div>
 		</div>
 	</div>
-</div>
 	<script type="text/javascript" src="js/table.js"></script>
+	<!-- bottom -->
+<div style="height:100px;width:100%;bottom:0px;text-align:center;background-color:white;position:relative;padding-top:30px;">
+Copyright© 2018 菏泽高级技工学校  版权所有 
+联系电话:0530-3877888、3877900、3877968、18369000060   学校微信公众号：hzgjjx
+</div>
+<!-- bottom end -->
 </body>
 </html>
